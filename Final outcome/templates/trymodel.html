@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Loan Model</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css" >
+      <!-- <link rel="stylesheet" href="style.css" > -->
+      <style>
+        .prediction {
+          margin: 40px;
+        }
+        h2{
+          margin: 40px;
+        }
+        h6 {
+          margin: 40px;
+        }
+        body {
+          background-image: url("https://media.self.com/photos/5f2c44161e8c21f82553f0e9/8:3/w_1280,c_limit/money_bills.jpeg");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          
+
+        } 
+        </style>
+      
+    </head>
+<body >
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+        <a class="navbar-brand col-md-1" href="index.html"> Approval Model</a>
+        <a class="col-md-8" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto nav navbar-right">
+            
+  
+                  <li class="nav-item active">
+                    <a class="nav-link" href="graphs.html">Vizualisations <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="trymodel.html">Model</a>
+                  </li>
+</ul> 
+        </div>
+      </nav>
+ <div class = 'back'>
+        <div class="title">
+              <div class="col-md-12">
+                <h1>Fill out the form to see if you qualify for a loan</h1>
+              </div>
+            </div>  
+      </div>
+      <br>
+    
+      <h1 class="inset"></h1>
+    <form method="POST" action="{{ url_for('predict')}}" role="form", name="predictionform" class= 'prediction'>
+      <select id="depend" name="dependants">
+        <option>Select number of dependants</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <div class="form-group">
+        <label for="Income">Applicant Income</label>
+        <input type="income" class="form-control" id="exampleInputPassword1" name="applicantincome"placeholder="Input annual income here…">
+      </div>
+      <div class="form-group">
+        <label for="Income">CoApplicant Income</label>
+        <input type="income" class="form-control" id="exampleInputPassword1" name="coapplicantincome"placeholder="Input annual coapplicant income here…">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Loan amount</label>
+        <input type="term" class="form-control" id="termexample" name="Loanamount"placeholder="Input loan amount here…">
+      </div>
+  
+      <select id="term" name="term">
+        <option>Select loan amount term</option>
+        <option value="120">120</option>
+        <option value="240">240</option>
+        <option value="360">360</option>
+      </select>
+      <select id="credit" name="credit">
+        <option>Select credit history</option>
+        <option text="Select 1 for credit >= 650 and 0 for > 650">Select 1 for credit >= 650 and 0 for > 650"</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+
+        
+      </select>
+      <select id="area" name="area">
+        <option>Select property Area</option>
+        <option text="Select 0 for Semiurban, 1 for Urban and 2 for Rural">Select 0 for Semiurban, 1 for Urban and 2 for Rural</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+      <select id="gender" name="gender">
+        <option>Select Gender</option>
+        <option text="Select 0 for Female and 1 for Male">Select 0 for Female and 1 for Male</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+      <select id="marital" name="marital">
+        <option>Select Marital Status</option>
+        <option text="Select 0 for No and 1 for Yes">Select 0 for No and 1 for Yes</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+      <select id="employed" name="employed">
+        <option>Are you self-employed?</option>
+        <option text="Select 0 for No and 1 for Yes">Select 0 for No and 1 for Yes</option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      
+      
+    </form>
+    <br>
+     <br>
+    <h6>
+    Note prediction outcome is "1" for Approve and "0" for rejected
+    </h6>
+    <br>
+     <br>
+    <h2>
+    {{ prediction_text }}
+    </h2>
+  </div>  
+  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='../js/java.js') }}"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  
+ </body>
+</html>
